@@ -42,6 +42,10 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
 
+      - name: Regenerate Gradle Wrapper
+        working-directory: project/android
+        run: gradle wrapper
+
       - name: Grant execute permission for gradlew
         working-directory: project/android
         run: chmod +x gradlew
