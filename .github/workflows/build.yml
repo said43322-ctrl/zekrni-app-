@@ -17,6 +17,9 @@ jobs:
           mkdir -p project
           unzip -o Zekrni_Android_Project_Navy_Complete.zip -d project
 
+      - name: Remove placeholder file from res raw
+        run: rm -f project/android/app/src/main/res/raw/README_ADD_ADHAN_SOUND.txt
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
