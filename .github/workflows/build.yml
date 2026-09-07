@@ -36,11 +36,11 @@ jobs:
         working-directory: project
         run: npx cap sync android
 
-      - name: Set up JDK 21
+      - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: '21'
+          java-version: '17'
 
       - name: Regenerate Gradle Wrapper
         working-directory: project/android
