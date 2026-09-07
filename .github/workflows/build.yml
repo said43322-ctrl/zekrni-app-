@@ -1,3 +1,4 @@
+
 name: Build APK
 
 on:
@@ -28,7 +29,7 @@ jobs:
 
       - name: Build web assets
         working-directory: project
-        run: npm run build
+        run: npm run build --if-present
 
       - name: Sync Capacitor Android
         working-directory: project
