@@ -22,9 +22,23 @@ jobs:
 
       - name: Fix Kotlin version conflict
         run: |
-          sed -i "s/kotlin_version = '[^']*'/kotlin_version = '1.9.24'/" project/android/variables.gradle
-          sed -i 's/kotlin_version = "[^"]*"/kotlin_version = "1.9.24"/' project/android/variables.gradle
-          cat project/android/variables.gradle
+          cat >> project/android/build.gradle << 'EOF'
+
+          allprojects {
+              afterEvaluate { proj ->
+                  proj.configurations.all {
+                      resolutionStrategy {
+                          force 'org.jetbrains.kotlin:kotlin-stdlib:1.9.24'
+                          force 'org.jetbrains.kotlin:kotlin-stdlib-common:1.9.24'
+                      }
+                      exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib-jdk7'
+                      exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib-jdk8'
+                  }
+              }
+          }
+          EOF
+          echo "----- CONTENT AFTER EDIT -----"
+          tail -n 20 project/android/build.gradle
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
