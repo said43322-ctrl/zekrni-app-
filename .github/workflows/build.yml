@@ -20,6 +20,12 @@ jobs:
       - name: Remove placeholder file from res raw
         run: rm -f project/android/app/src/main/res/raw/README_ADD_ADHAN_SOUND.txt
 
+      - name: Fix Kotlin version conflict
+        run: |
+          sed -i "s/kotlin_version = '[^']*'/kotlin_version = '1.9.24'/" project/android/variables.gradle
+          sed -i 's/kotlin_version = "[^"]*"/kotlin_version = "1.9.24"/' project/android/variables.gradle
+          cat project/android/variables.gradle
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
